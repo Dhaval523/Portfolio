@@ -1,0 +1,482 @@
+@import "tailwindcss";
+@import "swiper/css";
+@import "swiper/css/navigation";
+@import "bootstrap-icons/font/bootstrap-icons.css";
+@import "remixicon/fonts/remixicon.css";
+
+/* ===============================
+   VARIABLES
+================================== */
+:root {
+  --primary-color: #FC4100;
+  --primary-light-1: #FC410010;
+  --primary-light-2: #FC410020;
+  --hero-image-from: #f8b4741a;
+  --hero-image-to: #ff4c1f0c;
+  --black-color: #000000;
+  --white-color: #ffffff;
+  --text-color: #e5e7eb;
+  --transition-regular: 0.3s;
+
+  
+  --transition-slow: 0.6s ease;
+}
+
+/* ===============================
+   CUSTOM FONT CLASSES
+================================== */
+@layer utilities {
+  .font-sora {
+    font-family: var(--font-sora), sans-serif;
+  }
+
+  .font-unbounded {
+    font-family: var(--font-unbounded), cursive;
+  }
+}
+
+/* ===============================
+   BASE STYLES
+================================== */
+body {
+  background-color: #1c1b21;
+  color: var(--white-color);
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+/* Always hide horizontal overflow */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Prevent absolutely-positioned or wide elements from forcing scroll */
+* {
+  box-sizing: border-box;
+}
+
+/* Often sliders, images, or gradient circles cause extra width — clamp them */
+.hero-blur,
+.hero-blur--small,
+.hero-blur--medium,
+.hero-blur--large {
+  max-width: 100vw;
+  overflow: hidden;
+}
+
+/* Optional: make all images responsive so they don’t overflow */
+img, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ===============================
+   NAVBAR STYLES
+================================== */
+/* .active-links {
+  color: var(--primary-color);
+  position: relative;
+} */
+
+/* .active-links,
+.nav-menu a::after,
+.menu li a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  height: 2px;
+  background-color: var(--primary-color);
+  transition: var(--transition-regular);
+} */
+
+.nav-menu a::after,
+.menu li a::after {
+  opacity: 10
+}
+
+.nav-menu a:hover::after,
+.menu li a:hover::after {
+  opacity: 1;
+}
+
+.menu li a {
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.active-links::after {
+  opacity: 1 !important;
+}
+
+/* ===============================
+   HERO IMAGE & BLUR EFFECTS
+================================== */
+.hero-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle,
+      rgba(255, 255, 255, 0) 48%,
+      rgba(0, 0, 0, 0.8) 100%);
+}
+
+.hero-blur {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  z-index: 0;
+}
+
+.hero-blur--small {
+  width: 300px;
+  height: 300px;
+  background: linear-gradient(to right, var(--primary-light-1), var(--primary-light-2));
+}
+
+.hero-blur--medium {
+  width: 500px;
+  height: 500px;
+  background: linear-gradient(to right, var(--primary-light-1), var(--primary-light-2));
+}
+
+.hero-blur--large {
+  width: 700px;
+  height: 700px;
+  background: linear-gradient(to right, var(--primary-light-1), var(--primary-light-2));
+}
+
+/* ===============================
+   HERO SOCIAL ICONS
+================================== */
+.hero-social i {
+  width: 50px;
+  height: 50px;
+  border: 1px solid var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: var(--transition-regular);
+}
+
+.hero-social i:hover {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  transform: translateY(-8px);
+  box-shadow: 0 10px 15px rgba(252, 65, 0, 0.3);
+}
+
+/* services */
+.stroke-text {
+  -webkit-text-stroke: 1px var(--white-color);
+  color: transparent;
+  transition: var(--transition-regular);
+}
+
+.service-card:hover .stroke-text {
+  -webkit-text-stroke: 1px var(--primary-color);
+}
+
+/* custom scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color);
+  border-radius: 4px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: var(--primary-color);
+}
+
+
+@keyframes Anim-bottom {
+  0% {
+    transform: translateY(-50%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
+
+.work-content h2 {
+  opacity: 0;
+  animation: Anim-bottom var(--transition-regular) 1.4s forwards linear;
+}
+
+.work-content h3 {
+  opacity: 0;
+  animation: Anim-bottom var(--transition-regular) 1.2s forwards linear;
+}
+
+.work-content p {
+  opacity: 0;
+  animation: Anim-bottom var(--transition-regular) 1s forwards linear;
+}
+
+.work-icons {
+  opacity: 0;
+  animation: Anim-bottom var(--transition-regular) 0.8s forwards linear;
+}
+
+.work-share {
+  opacity: 0;
+  animation: Anim-bottom var(--transition-regular) 0.8s forwards linear;
+}
+
+.work-image {
+  opacity: 0;
+  animation: Anim-bottom var(--transition-regular) 0.8s forwards linear ;
+}
+.contact-col {
+  transition: var(--transition-regular);
+  cursor: pointer;
+}
+.contact-col span{
+  transition: var(--transition-regular) ;
+}
+.contact-col:hover span{
+ border-color : var(--white-color);
+ color: var(--white-color);
+}
+
+
+
+@media (max-width: 991px) {
+  body {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(180deg); }
+}
+
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 0.4; }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 4s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient 3s ease infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(252, 65, 0, 0.3); }
+  50% { box-shadow: 0 0 40px rgba(252, 65, 0, 0.6); }
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+/* Custom scrollbar for the section */
+.services-section::-webkit-scrollbar {
+  width: 6px;
+}
+
+.services-section::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+.services-section::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 3px;
+}
+
+.services-section::-webkit-scrollbar-thumb:hover {
+  background: #ff4500;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #1a1a1a;
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #ff4500;
+}
+
+
+/* Custom Swiper Styles */
+.project-swiper {
+  padding: 20px 0;
+}
+
+.stroke-text {
+  -webkit-text-stroke: 2px var(--primary-color);
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* Custom Pagination */
+.custom-pagination {
+  display: flex;
+  gap: 8px;
+}
+
+.custom-pagination .swiper-pagination-bullet {
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: 2px solid #374151;
+  color: #9CA3AF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  opacity: 1;
+}
+
+.custom-pagination .swiper-pagination-bullet-active {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+  color: white;
+  transform: scale(1.1);
+}
+
+/* Creative Effect Enhancements */
+.swiper-slide {
+  opacity: 0.3;
+  transition: opacity 0.3s ease;
+}
+
+.swiper-slide-active {
+  opacity: 1;
+}
+
+/* Custom Scrollbar for Project Descriptions */
+.project-swiper ::-webkit-scrollbar {
+  width: 4px;
+}
+
+.project-swiper ::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+.project-swiper ::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 2px;
+}
+
+/* Animation Classes */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .project-swiper {
+    padding: 10px 0;
+  }
+  
+  .custom-pagination .swiper-pagination-bullet {
+    width: 32px;
+    height: 32px;
+    font-size: 0.875rem;
+  }
+}
+/* Custom select arrow */
+select {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 0.75rem center;
+  background-repeat: no-repeat;
+  background-size: 1.5em 1.5em;
+  padding-right: 2.5rem;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+/* Focus styles for better accessibility */
+input:focus, textarea:focus, select:focus {
+  box-shadow: 0 0 0 3px rgba(252, 65, 0, 0.1);
+}
+
+/* Custom scrollbar for textarea */
+textarea::-webkit-scrollbar {
+  width: 6px;
+}
+
+textarea::-webkit-scrollbar-track {
+  background: #1a1a1a;
+  border-radius: 3px;
+}
+
+textarea::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 3px;
+}
+
+textarea::-webkit-scrollbar-thumb:hover {
+  background: #ff4500;
+}
+
+/* Loading animation */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
