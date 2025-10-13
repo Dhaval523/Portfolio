@@ -19,7 +19,7 @@ import AiResume from "@/public/resume.png"
 import restate from "@/public/restate.jpg"
 import assignmate from "@/public/assignmate.png"
 import agastya from "@/public/chatbot.jpg"
-import critiq from "@/public/critiq.jpg"
+import critiq from "@/public/critiQ.jpg"
 
 export default function WorkPage() {
   const [isVisible, setIsVisible] = useState(false);
