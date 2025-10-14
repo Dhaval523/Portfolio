@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import Link from "next/link";
 import Image from "next/image";
 import Hero from "../../public/myPHoto.jpg";
 import { CountUp } from "countup.js";
@@ -11,7 +10,7 @@ export default function Header() {
 
   const statsData = [
     { value: 3, label: "Years of\nExperience", suffix: "+" },
-    { value:  5, label: "Projects\nCompleted", suffix: "+" },
+    { value: 5, label: "Projects\nCompleted", suffix: "+" },
     { value: 5, label: "Technologies\nMastered", suffix: "+" },
     { value: 4, label: "Certificates", suffix: "+" },
   ];
@@ -32,11 +31,10 @@ export default function Header() {
         if (!countUp.error) countUp.start();
       }
     });
-  }, []);
+  }, [statsData]); // Added statsData to dependency array
 
   return (
     <header className="relative bg-[#0d0d0d] text-white overflow-hidden min-h-screen flex flex-col justify-between">
-
       {/* Animated Gradient Background */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Main gradient circles with animation */}
@@ -61,7 +59,6 @@ export default function Header() {
       {/* Main Content */}
       <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between
                   px-6 sm:px-12 lg:px-[8%] py-16 lg:py-24 flex-1">
-
         {/* Left Content with Staggered Animations */}
         <div className="lg:w-1/2 text-center lg:text-left space-y-6 sm:space-y-8">
           {/* Animated Title */}
@@ -188,8 +185,6 @@ export default function Header() {
           ))}
         </div>
       </div>
-
-     
     </header>
   );
 }

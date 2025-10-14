@@ -135,9 +135,9 @@ export default function Page() {
                                 Explore My <span className="text-[var(--primary-color)]">Journey</span>
                             </h2>
                             
-                            {/* Tabs Navigation */}
+                            {/* Tabs Navigation - Fixed: Removed unused 'index' */}
                             <div className="space-y-3">
-                                {tabs.map((tab, index) => (
+                                {tabs.map((tab) => (
                                     <button
                                         key={tab}
                                         onClick={() => setActiveTab(tab)}
@@ -156,8 +156,6 @@ export default function Page() {
                                     </button>
                                 ))}
                             </div>
-
-                           
                         </div>
                     </div>
 
@@ -245,7 +243,7 @@ export default function Page() {
                                 </div>
                             )}
 
-                            {/* Skills Content */}
+                            {/* Skills Content - Fixed: Removed unused 'skillIndex' */}
                             {activeTab === "Skills" && (
                                 <div className="space-y-8 max-h-[600px] overflow-y-auto pr-2 custom-scrollbar">
                                     {skillCategories.map((category, categoryIndex) => (
@@ -262,7 +260,7 @@ export default function Page() {
                                             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
                                                 {skills
                                                     .filter(skill => skill.category === category)
-                                                    .map((skill, skillIndex) => (
+                                                    .map((skill) => (
                                                         <div
                                                             key={skill.name}
                                                             className="group relative bg-gray-800/20 backdrop-blur-sm border border-gray-700 rounded-lg p-4 transition-all duration-300 hover:border-[var(--primary-color)]/50 hover:shadow-lg hover:shadow-[var(--primary-color)]/10 cursor-pointer"
@@ -291,7 +289,7 @@ export default function Page() {
                                 </div>
                             )}
 
-                            {/* About Me Content */}
+                            {/* About Me Content - Fixed: Escaped single quotes */}
                             {activeTab === "About me" && (
                                 <div className={`space-y-6 transform transition-all duration-700 ${
                                     isVisible ? 'translate-x-0 opacity-100' : 'translate-x-10 opacity-0'
@@ -299,13 +297,13 @@ export default function Page() {
                                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                                         <div className="space-y-4">
                                             <p className="text-gray-300 leading-relaxed">
-                                                Hi, I'm <span className="text-[var(--primary-color)] font-semibold">Dhaval Rathod</span>,
-                                                a passionate <strong>Full-Stack & React Native Developer</strong> who loves turning ideas
+                                                Hi, I&apos;m <span className="text-[var(--primary-color)] font-semibold">Dhaval Rathod</span>,
+                                                a passionate <strong>Full-Stack &amp; React Native Developer</strong> who loves turning ideas
                                                 into fast, modern, and visually appealing digital products.
                                             </p>
                                             <p className="text-gray-300 leading-relaxed">
                                                 I enjoy working with <strong>React / Next.js, Node, FastAPI</strong>,
-                                                and I've built AI-powered apps like <em className="text-[var(--primary-color)]">AI Resume Analyzer.</em>
+                                                and I&apos;ve built AI-powered apps like <em className="text-[var(--primary-color)]">AI Resume Analyzer.</em>
                                             </p>
                                         </div>
                                         

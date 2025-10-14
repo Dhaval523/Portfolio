@@ -15,11 +15,11 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/effect-creative";
 import "swiper/css/pagination";
-import AiResume from "@/public/resume.png"
-import restate from "@/public/restate.jpg"
-import assignmate from "@/public/assignmate.png"
-import agastya from "@/public/chatbot.jpg"
-import critiq from "@/public/critiQ.jpg"
+import AiResume from "@/public/resume.png";
+import restate from "@/public/restate.jpg";
+import assignmate from "@/public/assignmate.png";
+import agastya from "@/public/chatbot.jpg";
+import critiq from "@/public/critiQ.jpg";
 
 export default function WorkPage() {
   const [isVisible, setIsVisible] = useState(false);
@@ -27,7 +27,7 @@ export default function WorkPage() {
   const sectionRef = useRef(null);
   const swiperRef = useRef(null);
 
-  // ✅ Updated Real Projects
+  // Real Projects
   const projects = [
     {
       id: "01",
@@ -86,7 +86,7 @@ export default function WorkPage() {
     },
   ];
 
-  // 🔧 Tech Icon Helper
+  // Tech Icon Helper
   const getTechIcon = (tech) => {
     const techIcons = {
       "Next.js": SiNextdotjs,
@@ -105,7 +105,7 @@ export default function WorkPage() {
     return techIcons[tech] || FaJsSquare;
   };
 
-  // 👀 Fade-In Animation
+  // Fade-In Animation
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -140,7 +140,7 @@ export default function WorkPage() {
 
       {/* Mobile Project Cards (for small screens) */}
       <div className="block lg:hidden space-y-8">
-        {projects.map((project, index) => (
+        {projects.map((project) => (
           <div 
             key={project.id}
             className="bg-gray-900/30 backdrop-blur-sm border border-gray-800 rounded-2xl p-6 transition-all duration-500 hover:border-[var(--primary-color)]/30"
