@@ -13,7 +13,7 @@ import {
 export default function Page() {
     const [activeTab, setActiveTab] = useState("Experience");
     const [isVisible, setIsVisible] = useState(false);
-    const sectionRef = useRef(null);
+    const sectionRef = useRef<HTMLDivElement>(null);
 
     const tabs = ["Experience", "Education", "Skills", "About me"];
     
@@ -135,7 +135,7 @@ export default function Page() {
                                 Explore My <span className="text-[var(--primary-color)]">Journey</span>
                             </h2>
                             
-                            {/* Tabs Navigation - Fixed: Removed unused 'index' */}
+                            {/* Tabs Navigation */}
                             <div className="space-y-3">
                                 {tabs.map((tab) => (
                                     <button
@@ -174,13 +174,12 @@ export default function Page() {
                             {/* Experience Content */}
                             {activeTab === "Experience" && (
                                 <div className="space-y-6 max-h-[600px] overflow-y-auto pr-2 custom-scrollbar">
-                                    {experiences.map((exp, index) => (
+                                    {experiences.map((exp) => (
                                         <div
-                                            key={index}
+                                            key={exp.role}
                                             className={`group relative bg-gray-800/20 backdrop-blur-sm border border-gray-700 rounded-xl p-6 transition-all duration-500 hover:border-[var(--primary-color)]/50 hover:shadow-lg hover:shadow-[var(--primary-color)]/10 overflow-hidden ${
                                                 isVisible ? 'translate-x-0 opacity-100' : 'translate-x-10 opacity-0'
                                             }`}
-                                            style={{ transitionDelay: `${index * 150}ms` }}
                                         >
                                             <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
                                                 <div className="flex-1">
@@ -199,9 +198,9 @@ export default function Page() {
                                                         {exp.description}
                                                     </p>
                                                     <div className="flex flex-wrap gap-2">
-                                                        {exp.technologies.map((tech, techIndex) => (
+                                                        {exp.technologies.map((tech) => (
                                                             <span 
-                                                                key={techIndex}
+                                                                key={tech}
                                                                 className="px-3 py-1 bg-[var(--primary-color)]/10 text-[var(--primary-color)] rounded-full text-xs font-medium border border-[var(--primary-color)]/20"
                                                             >
                                                                 {tech}
@@ -218,13 +217,12 @@ export default function Page() {
                             {/* Education Content */}
                             {activeTab === "Education" && (
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-h-[600px] overflow-y-auto pr-2 custom-scrollbar">
-                                    {education.map((edu, index) => (
+                                    {education.map((edu) => (
                                         <div
-                                            key={index}
+                                            key={edu.degree}
                                             className={`group relative bg-gray-800/20 backdrop-blur-sm border border-gray-700 rounded-xl p-6 transition-all duration-500 hover:border-[var(--primary-color)]/50 hover:shadow-lg hover:shadow-[var(--primary-color)]/10 overflow-hidden ${
                                                 isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
                                             }`}
-                                            style={{ transitionDelay: `${index * 150}ms` }}
                                         >
                                             <span className="text-[var(--primary-color)] font-semibold text-sm">
                                                 {edu.year}
@@ -243,16 +241,15 @@ export default function Page() {
                                 </div>
                             )}
 
-                            {/* Skills Content - Fixed: Removed unused 'skillIndex' */}
+                            {/* Skills Content */}
                             {activeTab === "Skills" && (
                                 <div className="space-y-8 max-h-[600px] overflow-y-auto pr-2 custom-scrollbar">
-                                    {skillCategories.map((category, categoryIndex) => (
+                                    {skillCategories.map((category) => (
                                         <div 
                                             key={category}
                                             className={`transform transition-all duration-700 ${
                                                 isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
                                             }`}
-                                            style={{ transitionDelay: `${categoryIndex * 100}ms` }}
                                         >
                                             <h3 className="text-xl font-unbounded font-semibold mb-4 text-white border-b border-gray-700 pb-2">
                                                 {category}
@@ -289,11 +286,11 @@ export default function Page() {
                                 </div>
                             )}
 
-                            {/* About Me Content - Fixed: Escaped single quotes */}
+                            {/* About Me Content */}
                             {activeTab === "About me" && (
                                 <div className={`space-y-6 transform transition-all duration-700 ${
                                     isVisible ? 'translate-x-0 opacity-100' : 'translate-x-10 opacity-0'
-                                }`} style={{ transitionDelay: '200ms' }}>
+                                }`}>
                                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                                         <div className="space-y-4">
                                             <p className="text-gray-300 leading-relaxed">
@@ -316,8 +313,8 @@ export default function Page() {
                                                     { icon: "bi bi-telephone", text: "(+91) 76240 41235" },
                                                     { icon: "bi bi-envelope", text: "dr9373407@gmail.com" },
                                                     { icon: "bi bi-translate", text: "English | Hindi | Gujarati" }
-                                                ].map((item, index) => (
-                                                    <li key={index} className="flex items-center gap-3 text-gray-300 text-sm">
+                                                ].map((item) => (
+                                                    <li key={item.text} className="flex items-center gap-3 text-gray-300 text-sm">
                                                         <i className={`${item.icon} text-[var(--primary-color)]`}></i>
                                                         <span>{item.text}</span>
                                                     </li>

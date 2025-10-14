@@ -6,7 +6,7 @@ import { CountUp } from "countup.js";
 
 export default function Header() {
   const [isVisible, setIsVisible] = useState(false);
-  const countRefs = useRef([]);
+  const countRefs = useRef<HTMLSpanElement[]>([]);
 
   const statsData = [
     { value: 3, label: "Years of\nExperience", suffix: "+" },
@@ -31,7 +31,13 @@ export default function Header() {
         if (!countUp.error) countUp.start();
       }
     });
-  }, [statsData]); // Added statsData to dependency array
+  }, [statsData]);
+
+  const addToRefs = (el: HTMLSpanElement | null, index: number) => {
+    if (el && !countRefs.current.includes(el)) {
+      countRefs.current[index] = el;
+    }
+  };
 
   return (
     <header className="relative bg-[#0d0d0d] text-white overflow-hidden min-h-screen flex flex-col justify-between">
@@ -78,7 +84,7 @@ export default function Header() {
             isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
           }`}>
             <p className="text-gray-300 text-base sm:text-lg lg:text-xl font-sora py-4 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-              A passionate <span className="text-[var(--primary-color)] font-semibold">Full-Stack & React Native Developer</span> who loves crafting 
+              A passionate <span className="text-[var(--primary-color)] font-semibold">Full-Stack &amp; React Native Developer</span> who loves crafting 
               exceptional web apps, mobile experiences, and AI-powered tools that make a real difference. 
               From sleek React/Next.js dashboards to cross-platform React Native apps, I build products 
               that are fast, beautiful, and user-friendly.
@@ -168,16 +174,17 @@ export default function Header() {
               key={index} 
               className={`group text-center p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 
                         hover:border-[var(--primary-color)]/30 hover:bg-white/10  
-                        hover:scale-105 hover:shadow-2xl hover:shadow-[var(--primary-color)]/10 transform transition-all duration-500 ease-out delay-${index * 200} ${
+                        hover:scale-105 hover:shadow-2xl hover:shadow-[var(--primary-color)]/10 transform transition-all duration-500 ease-out ${
                           isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
                         }`}
+              style={{ transitionDelay: `${index * 200}ms` }}
             >
-              <h1
-                ref={(el) => (countRefs.current[index] = el)}
-                className="text-3xl sm:text-4xl lg:text-5xl font-unbounded font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-300 mb-2"
+              <span
+                ref={(el) => addToRefs(el, index)}
+                className="text-3xl sm:text-4xl lg:text-5xl font-unbounded font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-300 mb-2 block"
               >
                 0
-              </h1>
+              </span>
               <p className="text-sm sm:text-base text-gray-300 font-medium whitespace-pre-line leading-relaxed group-hover:text-white transition-colors">
                 {stat.label}
               </p>

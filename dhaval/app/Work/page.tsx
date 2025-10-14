@@ -21,14 +21,26 @@ import assignmate from "@/public/assignmate.png";
 import agastya from "@/public/chatbot.jpg";
 import critiq from "@/public/critiQ.jpg";
 
+interface Project {
+  id: string;
+  title: string;
+  desc: string;
+  tech: string[];
+  img: any;
+  liveLink: string;
+  githubLink: string;
+  category: string;
+  features: string[];
+}
+
 export default function WorkPage() {
   const [isVisible, setIsVisible] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
-  const sectionRef = useRef(null);
-  const swiperRef = useRef(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const swiperRef = useRef<any>(null);
 
   // Real Projects
-  const projects = [
+  const projects: Project[] = [
     {
       id: "01",
       title: "AI Resume Analyzer",
@@ -87,8 +99,8 @@ export default function WorkPage() {
   ];
 
   // Tech Icon Helper
-  const getTechIcon = (tech) => {
-    const techIcons = {
+  const getTechIcon = (tech: string) => {
+    const techIcons: { [key: string]: React.ComponentType<any> } = {
       "Next.js": SiNextdotjs,
       "React.js": FaReact,
       "React Native": FaReact,
@@ -172,10 +184,10 @@ export default function WorkPage() {
 
               {/* Features */}
               <div className="grid grid-cols-2 gap-2">
-                {project.features.map((f, i) => (
-                  <div key={i} className="flex items-center gap-2 text-gray-400">
+                {project.features.map((feature) => (
+                  <div key={feature} className="flex items-center gap-2 text-gray-400">
                     <div className="w-2 h-2 bg-[var(--primary-color)] rounded-full"></div>
-                    <span className="text-xs font-medium">{f}</span>
+                    <span className="text-xs font-medium">{feature}</span>
                   </div>
                 ))}
               </div>
@@ -184,12 +196,12 @@ export default function WorkPage() {
               <div>
                 <h4 className="text-sm font-semibold text-white mb-3">Tech Stack</h4>
                 <div className="flex flex-wrap gap-2">
-                  {project.tech.map((t, i) => {
-                    const Icon = getTechIcon(t);
+                  {project.tech.map((tech) => {
+                    const Icon = getTechIcon(tech);
                     return (
-                      <div key={i} className="flex items-center gap-1 px-3 py-2 bg-gray-500/5 border border-gray-700 rounded-lg">
+                      <div key={tech} className="flex items-center gap-1 px-3 py-2 bg-gray-500/5 border border-gray-700 rounded-lg">
                         <Icon className="text-lg text-[var(--primary-color)]" />
-                        <span className="text-xs font-medium text-gray-300">{t}</span>
+                        <span className="text-xs font-medium text-gray-300">{tech}</span>
                       </div>
                     );
                   })}
@@ -257,11 +269,11 @@ export default function WorkPage() {
           onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
           className="project-swiper"
         >
-          {projects.map((project, index) => (
+          {projects.map((project) => (
             <SwiperSlide key={project.id}>
               <div className={`grid lg:grid-cols-2 gap-8 xl:gap-12 items-center transition-all duration-1000 ${
                 isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-              }`} style={{ transitionDelay: `${index * 200}ms` }}>
+              }`}>
                 
                 {/* Text Section */}
                 <div className="space-y-6 order-2 lg:order-1">
@@ -277,10 +289,10 @@ export default function WorkPage() {
 
                   {/* Features */}
                   <div className="grid grid-cols-2 gap-3 mt-4">
-                    {project.features.map((f, i) => (
-                      <div key={i} className="flex items-center gap-2 text-gray-400">
+                    {project.features.map((feature) => (
+                      <div key={feature} className="flex items-center gap-2 text-gray-400">
                         <div className="w-2 h-2 bg-[var(--primary-color)] rounded-full"></div>
-                        <span className="text-sm font-medium">{f}</span>
+                        <span className="text-sm font-medium">{feature}</span>
                       </div>
                     ))}
                   </div>
@@ -289,12 +301,12 @@ export default function WorkPage() {
                   <div className="mt-6">
                     <h4 className="text-lg font-semibold text-white mb-4">Tech Stack</h4>
                     <div className="flex flex-wrap gap-3">
-                      {project.tech.map((t, i) => {
-                        const Icon = getTechIcon(t);
+                      {project.tech.map((tech) => {
+                        const Icon = getTechIcon(tech);
                         return (
-                          <div key={i} className="group flex items-center gap-2 px-4 py-3 bg-gray-500/5 border border-gray-700 rounded-xl hover:border-[var(--primary-color)]/50 hover:bg-[var(--primary-color)]/10 transition-all duration-300 cursor-pointer">
+                          <div key={tech} className="group flex items-center gap-2 px-4 py-3 bg-gray-500/5 border border-gray-700 rounded-xl hover:border-[var(--primary-color)]/50 hover:bg-[var(--primary-color)]/10 transition-all duration-300 cursor-pointer">
                             <Icon className="text-2xl text-[var(--primary-color)] group-hover:scale-110 transition-transform duration-300" />
-                            <span className="text-sm font-medium text-gray-300 group-hover:text-white">{t}</span>
+                            <span className="text-sm font-medium text-gray-300 group-hover:text-white">{tech}</span>
                           </div>
                         );
                       })}

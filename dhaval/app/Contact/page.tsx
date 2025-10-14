@@ -71,8 +71,8 @@ export default function ContactPage() {
       message: ''
     });
 
-    // ✅ Fixed apostrophe issue here
-    alert('Message sent successfully! I\u2019ll get back to you soon.');
+    // ✅ Fixed apostrophe issue
+    alert('Message sent successfully! I&apos;ll get back to you soon.');
   };
 
   const contactInfo = [
@@ -118,6 +118,7 @@ export default function ContactPage() {
           Get In <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--primary-color)] to-[var(--primary-light-2)]">Touch</span>
         </h1>
         <p className="text-gray-400 text-lg lg:text-xl max-w-2xl mx-auto font-sora">
+          {/* ✅ Fixed apostrophe */}
           Ready to bring your ideas to life? Let&apos;s discuss your project and create something amazing together.
         </p>
       </div>
@@ -130,9 +131,11 @@ export default function ContactPage() {
           <div className="relative bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm border border-gray-700 rounded-2xl p-6 lg:p-8 shadow-2xl hover:shadow-[var(--primary-color)]/10 transition-all duration-500 hover:border-[var(--primary-color)]/30">
             <div className="mb-8">
               <h2 className="text-3xl lg:text-4xl font-unbounded font-semibold text-white mb-3">
+                {/* ✅ Fixed apostrophe */}
                 Let&apos;s Work <span className="text-[var(--primary-color)]">Together</span>
               </h2>
               <p className="text-gray-400 text-lg leading-relaxed font-sora">
+                {/* ✅ Fixed apostrophe */}
                 Have a project in mind? Fill out this form and I&apos;ll get back to you within 24 hours to discuss how we can bring your vision to life.
               </p>
             </div>
@@ -243,7 +246,7 @@ export default function ContactPage() {
               Contact <span className="text-[var(--primary-color)]">Information</span>
             </h3>
 
-            {contactInfo.map((item) => (
+            {contactInfo.map((item, index) => ( // ✅ Added index parameter
               <a
                 key={item.label}
                 href={item.link}
@@ -269,7 +272,7 @@ export default function ContactPage() {
           <div className="pt-6 border-t border-gray-700">
             <h4 className="text-xl font-unbounded font-semibold text-white mb-6">Follow Me On</h4>
             <div className="flex gap-4">
-              {socialLinks.map((social) => (
+              {socialLinks.map((social, index) => ( // ✅ Added index parameter
                 <a
                   key={social.label}
                   href={social.href}
@@ -293,6 +296,7 @@ export default function ContactPage() {
               <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
               <span className="text-green-400 font-semibold">Available for Projects</span>
             </div>
+            {/* ✅ Fixed apostrophe */}
             <p className="text-gray-400 text-sm">
               I&apos;m currently accepting new projects and would love to hear about your ideas. Typical response time: within 24 hours.
             </p>
