@@ -7,6 +7,7 @@ import { CountUp } from "countup.js";
 export default function Header() {
   const [isVisible, setIsVisible] = useState(false);
   const countRefs = useRef<HTMLSpanElement[]>([]);
+  const [hasAnimated, setHasAnimated] = useState(false);
 
   const statsData = [
     { value: 3, label: "Years of\nExperience", suffix: "+" },
@@ -19,19 +20,21 @@ export default function Header() {
     // Trigger animations after component mounts
     setIsVisible(true);
 
-    // Initialize countup animations
-    countRefs.current.forEach((el, index) => {
-      if (el) {
-        const countUp = new CountUp(el, statsData[index].value, {
-          duration: 3,
-          separator: ",",
-          suffix: statsData[index].suffix,
-          enableScrollOnce: true,
-        });
-        if (!countUp.error) countUp.start();
-      }
-    });
-  }, [statsData]);
+    // Initialize countup animations only once
+    if (!hasAnimated) {
+      countRefs.current.forEach((el, index) => {
+        if (el) {
+          const countUp = new CountUp(el, statsData[index].value, {
+            duration: 3,
+            separator: ",",
+            suffix: statsData[index].suffix,
+          });
+          if (!countUp.error) countUp.start();
+        }
+      });
+      setHasAnimated(true);
+    }
+  }, [statsData, hasAnimated]);
 
   const addToRefs = (el: HTMLSpanElement | null, index: number) => {
     if (el && !countRefs.current.includes(el)) {
