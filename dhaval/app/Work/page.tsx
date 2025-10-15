@@ -1,7 +1,7 @@
 "use client";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, EffectCreative, Pagination } from "swiper/modules";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import {
@@ -10,6 +10,7 @@ import {
 import {
   FaJsSquare, FaReact, FaNodeJs, FaPython, FaGithub, FaExternalLinkAlt,
 } from "react-icons/fa";
+import { Swiper as SwiperType } from "swiper/types";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -26,7 +27,7 @@ interface Project {
   title: string;
   desc: string;
   tech: string[];
-  img: any;
+  img: StaticImageData;
   liveLink: string;
   githubLink: string;
   category: string;
@@ -37,7 +38,7 @@ export default function WorkPage() {
   const [isVisible, setIsVisible] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const sectionRef = useRef<HTMLDivElement>(null);
-  const swiperRef = useRef<any>(null);
+  const swiperRef = useRef<SwiperType | null>(null);
 
   // Real Projects
   const projects: Project[] = [
@@ -100,7 +101,7 @@ export default function WorkPage() {
 
   // Tech Icon Helper
   const getTechIcon = (tech: string) => {
-    const techIcons: { [key: string]: React.ComponentType<any> } = {
+    const techIcons: { [key: string]: React.ComponentType<{ className?: string }> } = {
       "Next.js": SiNextdotjs,
       "React.js": FaReact,
       "React Native": FaReact,
@@ -237,7 +238,9 @@ export default function WorkPage() {
       {/* Desktop Swiper Section */}
       <div className="hidden lg:block relative z-10">
         <Swiper
-          ref={swiperRef}
+          onSwiper={(swiper) => {
+            swiperRef.current = swiper;
+          }}
           modules={[Navigation, EffectCreative, Pagination]}
           loop={true}
           speed={800}
